@@ -1,7 +1,5 @@
 package net.jkcode.jkjob
 
-import net.jkcode.jksoa.common.serverLogger
-
 /**
  * 测试的bean类
  * @author shijianhang<772910474@qq.com>

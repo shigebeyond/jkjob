@@ -1,11 +1,8 @@
 package net.jkcode.jkjob
 
-import net.jkcode.jksoa.common.RpcRequest
-import net.jkcode.jksoa.common.ShardingRpcRequest
+import net.jkcode.jkjob.job.InvocationJob
 import net.jkcode.jkutil.invocation.Invocation
 import net.jkcode.jkutil.invocation.ShardingInvocation
-import net.jkcode.jkjob.job.InvocationJob
-import net.jkcode.jksoa.rpc.example.ISimpleService
 import org.junit.Test
 
 /**
@@ -47,20 +44,4 @@ class JobExprTests: BaseJobTests() {
         toAndParseExpr(job)
     }
 
-    @Test
-    fun testRpcJobExpr(){
-        val req = RpcRequest(ISimpleService::echo, arrayOf<Any?>("测试消息"))
-        val job = InvocationJob(req)
-        toAndParseExpr(job)
-    }
-
-    @Test
-    fun testShardingRpcJobExpr(){
-        val args:Array<Any?> = Array(3) { i ->
-            "第${i}个分片的参数" // ISimpleService::echo 的实参
-        }
-        val req = ShardingRpcRequest(ISimpleService::echo, args, 1)
-        val job = InvocationJob(req)
-        toAndParseExpr(job)
-    }
 }

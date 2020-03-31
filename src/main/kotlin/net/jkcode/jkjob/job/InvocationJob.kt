@@ -1,5 +1,6 @@
 package net.jkcode.jkjob.job
 
+import net.jkcode.jkjob.IJobExecutionContext
 import net.jkcode.jkutil.invocation.IInvocation
 
 /**
