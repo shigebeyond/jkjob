@@ -6,7 +6,7 @@ Trigger用于触发Job的执行。
 
 Trigger包含了多个job的作业执行上下文，用于给Job存储与传递状态数据。
 
-jksoa-job自带了各种不同类型的Trigger，最常用的主要是`PeriodicTrigge`r和`CronTrigger`。
+jkjob自带了各种不同类型的Trigger，最常用的主要是`PeriodicTrigge`r和`CronTrigger`。
 
 ## PeriodicTrigger -- 周期性重复的触发器
 主要用于周期性执行Job, 即在特定的时间点执行，重复执行N次，每次执行间隔T个时间单位。

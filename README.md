@@ -1,5 +1,5 @@
 # 概述
-jksoa-job 是一个轻量级分布式作业调度平台，核心的设计理念是简单、轻量、易扩展、高性能。
+jkjob 是一个轻量级分布式作业调度平台，核心的设计理念是简单、轻量、易扩展、高性能。
 
 ## 特性
 
@@ -22,13 +22,13 @@ jksoa-job 是一个轻量级分布式作业调度平台，核心的设计理念�
 Quartz作为开源作业调度中的佼佼者，是作业调度的首选。但存在以下问题：
 
 1. API设计有点啰嗦, 使用麻烦
-2. quartz底层以“抢占式”获取DB锁并由抢占成功的节点来执行作业，会导致节点负载悬殊非常大, 同时由抢占失败导致节点空转；而jksoa-job通过调度者主动分配作业给执行者，从而充分发挥集群优势，达到各节点负载均衡。
+2. quartz底层以“抢占式”获取DB锁并由抢占成功的节点来执行作业，会导致节点负载悬殊非常大, 同时由抢占失败导致节点空转；而jkjob通过调度者主动分配作业给执行者，从而充分发挥集群优势，达到各节点负载均衡。
 
 因此, 本人依赖于jksoa-rpc实现一个更轻量更简单更高效的分布式作业调度系统
 
 # 快速入门
 
-jksoa-job的核心组件有2个：
+jkjob的核心组件有2个：
 1. Job - 作业, 代表作业执行
 2. Trigger - 触发器, 负责定时触发作业执行, 可添加/删除job, 代表作业调度
 
@@ -68,15 +68,15 @@ val trigger = CronJobLauncher.lauch(cronJobExpr)
 
 # 文档
 
-# jksoa-job
+# jkjob
 
 分布式任务调度的组件
 
 ## 入门
-1. [作业](doc/job/job.md)
-2. [触发器](doc/job/trigger.md)
+1. [作业](doc/job.md)
+2. [触发器](doc/trigger.md)
 
 ## 高级
-3. [架构](doc/job/architecture.md)
-4. [分片策略](doc/job/sharding_strategy.md)
-5. [调度者集群](doc/job/cluster.md)
+3. [架构](doc/architecture.md)
+4. [分片策略](doc/sharding_strategy.md)
+5. [调度者集群](doc/cluster.md)
