@@ -91,7 +91,7 @@ abstract class BaseTrigger : ITrigger {
                         JobExecutionContext(job.id, this)
                     }!!
                     // 执行作业, 要处理好异常
-                    val resFuture = trySupplierFuture {
+                    trySupplierFuture {
                         // 执行作业
                         jobLogger.debug("{}执行作业: {}", this.javaClass.simpleName, ctx)
                         job.execute(ctx)
@@ -101,9 +101,7 @@ abstract class BaseTrigger : ITrigger {
                             // TODO: 保存 ctx.attrs
                             ctx.attrs.cleanDirty()
                         }*/
-                    }
-
-                    resFuture.whenComplete { r, ex ->
+                    }.whenComplete { r, ex ->
                         // 记录执行异常
                         if(ex != null)
                             job.logExecutionException(ex)
