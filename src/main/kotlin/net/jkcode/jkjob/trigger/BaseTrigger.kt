@@ -81,7 +81,7 @@ abstract class BaseTrigger : ITrigger {
     protected fun executeJob() {
         // 线程池中执行作业
         try {
-            CommonThreadPool.execute {
+            CommonExecutor.execute {
                 for(job in jobs){
                     // 请求域的开始
                     GlobalAllRequestScope.beginScope()
