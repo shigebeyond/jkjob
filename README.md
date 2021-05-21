@@ -32,6 +32,21 @@ jkjob的核心组件有2个：
 1. Job - 作业, 代表作业执行
 2. Trigger - 触发器, 负责定时触发作业执行, 可添加/删除job, 代表作业调度
 
+## 添加依赖
+1. gradle
+```
+compile "net.jkcode:jkjob:1.9.0"
+```
+
+2. maven
+```
+<dependency>
+    <groupId>net.jkcode</groupId>
+    <artifactId>jkjob</artifactId>
+    <version>1.9.0</version>
+</dependency>
+```
+
 ## 分别定义 job 与 trigger
 
 ```
