@@ -38,16 +38,16 @@ object JobExprParser: IJobParser {
         if(expr.startsWith("custom")){ // 自定义的作业类型
             val subexprs = expr.split(' ', limit = 2)
             if(subexprs.size != 2)
-                throw net.jkcode.jkjob.JobException("自定义的作业表达式是由2个元素组成, 2个元素之间以空格分隔: 1 作业类型 2 自定义的作业类名")
+                throw JobException("自定义的作业表达式是由2个元素组成, 2个元素之间以空格分隔: 1 作业类型 2 自定义的作业类名")
             val clazz = subexprs[1]
             val c = Class.forName(clazz)
-            return c.newInstance() as net.jkcode.jkjob.IJob
+            return c.newInstance() as IJob
         }
 
         // 2 其他作业类型: lpc / rpc / shardingLpc / shardingRpc
         val subexprs = expr.split(' ', limit = 5)
         if(subexprs.size < 4)
-            throw net.jkcode.jkjob.JobException("其他作业表达式是由5个元素组成, 5个元素之间以空格分隔: 1 作业类型 2 类名 3 方法签名 4 方法实参列表 5 分片处理之每个分片的参数个数, 非分片处理可省略")
+            throw JobException("其他作业表达式是由5个元素组成, 5个元素之间以空格分隔: 1 作业类型 2 类名 3 方法签名 4 方法实参列表 5 分片处理之每个分片的参数个数, 非分片处理可省略")
         val type: String = subexprs[0]
         val clazz: String = subexprs[1]
         val methodSignature: String = subexprs[2]
@@ -64,7 +64,7 @@ object JobExprParser: IJobParser {
             "rpc" -> createRpcInvocation("net.jkcode.jksoa.common.RpcRequest", method, args) as Invocation
             //"shardingRpc" -> ShardingRpcRequest(method, args, argsPerSharding)
             "shardingRpc" -> createRpcInvocation("net.jkcode.jksoa.common.ShardingRpcRequest", method, args) as Invocation
-            else -> throw net.jkcode.jkjob.JobException("无效作业类型: $type")
+            else -> throw JobException("无效作业类型: $type")
         }
         return InvocationJob(inv)
     }
