@@ -7,8 +7,8 @@ package net.jkcode.jkjob
  */
 class LocalBean {
 
-    public fun echo(msg: String): String{
-        jobLogger.debug("调用本地bean的方法: echo(\"{}\")", msg)
+    public fun sayHi(msg: String): String{
+        jobLogger.debug("调用本地bean的方法: sayHi(\"{}\")", msg)
         return msg
     }
 

@@ -14,10 +14,10 @@ class LpcJobTests: BaseJobTests(){
             val c = Class.forName("fuck")
 
 //        val c = SimpleService::class.java
-//        val m = c.getMethod("echo", String::class.java)
+//        val m = c.getMethod("sayHi", String::class.java)
 //        println(m.getSignature())
 
-            val m = c.getMethodBySignature("ping()")
+            val m = c.getMethodBySignature("hostname()")
             val bean = c.newInstance()
             val result = m!!.invoke(bean)
             println(result)
@@ -28,7 +28,7 @@ class LpcJobTests: BaseJobTests(){
 
     @Test
     fun testLpcJob(){
-        val inv = Invocation(LocalBean::echo, arrayOf<Any?>("测试消息"))
+        val inv = Invocation(LocalBean::sayHi, arrayOf<Any?>("测试消息"))
         val job = InvocationJob(inv)
         buildPeriodicTrigger(job)
     }
@@ -36,9 +36,9 @@ class LpcJobTests: BaseJobTests(){
     @Test
     fun testShardingLpcJob(){
         val args:Array<Any?> = Array(3) { i ->
-            "第${i}个分片的参数" // ISimpleService::echo 的实参
+            "第${i}个分片的参数" // ISimpleService::sayHi 的实参
         }
-        val inv = ShardingInvocation(LocalBean::echo, args, 1)
+        val inv = ShardingInvocation(LocalBean::sayHi, args, 1)
         val job = InvocationJob(inv)
         buildPeriodicTrigger(job)
     }
@@ -46,7 +46,7 @@ class LpcJobTests: BaseJobTests(){
     // 放到 jksoa-rpc-client 工程中
     /*@Test
     fun testRpcJob(){
-        val req = RpcRequest(ISimpleService::echo, arrayOf<Any?>("测试消息"))
+        val req = RpcRequest(ISimpleService::sayHi, arrayOf<Any?>("测试消息"))
         val job = InvocationJob(req)
         buildCronTrigger(job)
     }
@@ -54,9 +54,9 @@ class LpcJobTests: BaseJobTests(){
     @Test
     fun testShardingRpcJob(){
         val args:Array<Any?> = Array(3) { i ->
-            "第${i}个分片的参数" // ISimpleService::echo 的实参
+            "第${i}个分片的参数" // ISimpleService::sayHi 的实参
         }
-        val req = ShardingRpcRequest(ISimpleService::echo, args, 1)
+        val req = ShardingRpcRequest(ISimpleService::sayHi, args, 1)
         val job = InvocationJob(req)
         buildPeriodicTrigger(job)
     }*/

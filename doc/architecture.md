@@ -29,7 +29,7 @@ import net.jkcode.jkjob.job.remote.RpcJob
 import net.jkcode.jkjob.trigger.CronTrigger
 
 // 定义job
-val job = RpcJob(ISimpleService::echo, arrayOf<Any?>("测试消息"))
+val job = RpcJob(ISimpleService::sayHi, arrayOf<Any?>("测试消息"))
 // 定义trigger
 val trigger = CronTrigger("0/3 * * * * ?")
 // 给trigger添加要触发的job
@@ -129,9 +129,9 @@ rpc的分片作业的创建如下:
 ```
 // rpc的分片作业
 val args:Array<Any?> = Array(3) { i ->
-    "第${i}个分片的参数" // ISimpleService::echo 的实参
+    "第${i}个分片的参数" // ISimpleService::sayHi 的实参
 }
-val req = ShardingRpcRequest(ISimpleService::echo, args, 1)
+val req = ShardingRpcRequest(ISimpleService::sayHi, args, 1)
 val job = InvocationJob(req)
 ```
 

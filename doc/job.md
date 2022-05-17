@@ -185,20 +185,20 @@ IInvocation
 以下的几类作业均是基于调用方法来封装作业逻辑, 不管是本地方法, 还是远程方法, 因此可以使用cron与作业的复合表达式来表达, 因此可以使用`CronJobLauncher.lauch(cronJobExpr)`来调度作业
 
 ## 1 Invocation -- 调用本地bean方法
-调用的是本地bean方法: `LocalBean::echo(String)`
+调用的是本地bean方法: `LocalBean::sayHi(String)`
 
 有2个参数: 1. 方法引用 2. 实参数组
 
 ```
 // 调用本地bean方法的作业
 // 调用
-val inv = Invocation(LocalBean::echo, arrayOf<Any?>("测试消息"))
+val inv = Invocation(LocalBean::sayHi, arrayOf<Any?>("测试消息"))
 // 作业
 val job = InvocationJob(inv)
 ```
 
 ## 2 ShardingInvocation -- 分片调用本地bean方法
-调用的是本地bean方法: `LocalBean::echo(String)`, 只是加上分片调用
+调用的是本地bean方法: `LocalBean::sayHi(String)`, 只是加上分片调用
 
 有2个参数: 1. 方法引用 2. 实参数组的数组, 即实参的二维数组, 即每个分片的实参数组
 
@@ -210,23 +210,23 @@ val job = InvocationJob(inv)
 // 调用本地bean方法的分片作业
 // 调用
 val args:Array<Any?> = Array(3) { i ->
-    "第${i}个分片的参数" // ISimpleService::echo 的实参
+    "第${i}个分片的参数" // ISimpleService::sayHi 的实参
 }
-val inv = ShardingInvocation(LocalBean::echo, args, 1)
+val inv = ShardingInvocation(LocalBean::sayHi, args, 1)
 // 作业
 val job = InvocationJob(inv)
 ```
 
 ## 3 RpcRequest -- 调用远程方法(即发送rpc请求)
 
-调用的是远程方法: `ISimpleService::echo(String)`, 实际上是发送rpc请求
+调用的是远程方法: `ISimpleService::sayHi(String)`, 实际上是发送rpc请求
 
 有2个参数: 1. 方法引用 2. 实参数组
 
 ```
 // 发送rpc请求的作业
 // 调用(即rpc请求)
-val req = RpcRequest(ISimpleService::echo, arrayOf<Any?>("测试消息"))
+val req = RpcRequest(ISimpleService::sayHi, arrayOf<Any?>("测试消息"))
 // 作业
 val job = InvocationJob(req)
 ```
@@ -237,7 +237,7 @@ val job = InvocationJob(req)
 `public constructor(func: KFunction<*>, args: Array<Any?> = emptyArray()) : this(func.javaMethod!!, args)`
 
 ## 4 ShardingRpcRequest -- 分片调用远程方法(即发送分片rpc请求的作业)
-调用的是远程方法: `ISimpleService::echo(String)`, 只是加上分片调用
+调用的是远程方法: `ISimpleService::sayHi(String)`, 只是加上分片调用
 
 有2个参数: 1. 方法引用 2. 实参数组的数组, 即实参的二维数组, 即每个分片的实参数组
 
@@ -249,9 +249,9 @@ val job = InvocationJob(req)
 // 发送分片rpc请求的作业
 // 调用(即分片rpc请求)
 val args:Array<Any?> = Array(3) { i ->
-    "第${i}个分片的参数" // ISimpleService::echo 的实参
+    "第${i}个分片的参数" // ISimpleService::sayHi 的实参
 }
-val req = ShardingRpcRequest(ISimpleService::echo, args, 1)
+val req = ShardingRpcRequest(ISimpleService::sayHi, args, 1)
 // 作业
 val job = InvocationJob(req)
 ```

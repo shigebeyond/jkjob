@@ -29,7 +29,7 @@ class JobExprTests: BaseJobTests() {
 
     @Test
     fun testLpcJobExpr(){
-        val inv = Invocation(LocalBean::echo, arrayOf<Any?>("测试消息"))
+        val inv = Invocation(LocalBean::sayHi, arrayOf<Any?>("测试消息"))
         val job = InvocationJob(inv)
         toAndParseExpr(job)
     }
@@ -37,9 +37,9 @@ class JobExprTests: BaseJobTests() {
     @Test
     fun testShardingLpcJobExpr(){
         val args:Array<Any?> = Array(3) { i ->
-            "第${i}个分片的参数" // ISimpleService::echo 的实参
+            "第${i}个分片的参数" // ISimpleService::sayHi 的实参
         }
-        val inv = ShardingInvocation(LocalBean::echo, args, 1)
+        val inv = ShardingInvocation(LocalBean::sayHi, args, 1)
         val job = InvocationJob(inv)
         toAndParseExpr(job)
     }
