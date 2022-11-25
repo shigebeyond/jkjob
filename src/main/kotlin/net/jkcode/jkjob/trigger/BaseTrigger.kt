@@ -115,7 +115,7 @@ abstract class BaseTrigger : ITrigger {
                 triggerCount++
             }
         }catch (e: RejectedExecutionException){
-            jobLogger.errorAndPrint("执行作业失败: 公共线程池已满", e)
+            jobLogger.errorColor("执行作业失败: 公共线程池已满", e)
         }
     }
 
