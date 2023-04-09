@@ -67,20 +67,22 @@ trigger.addJob(job)
 trigger.start()
 ```
 
-## 使用 `CronJobLauncher` 简化代码
+## 使用 `DefaultScheduler` 简化代码
 
-使用`net.jkcode.jkjob.cronjob.CronJobLauncher`, 配合cron与作业的复合表达式, 只需要两行代码便可定义定时作业
+使用`net.jkcode.jkjob.schedulers.DefaultScheduler`, 配合cron与作业的复合表达式, 只需要两行代码便可定义定时作业
 
-实际上`CronJobLauncher`是从cron与作业的复合表达式中, 分别解析出 `CronTrigger` 与 `RpcJob`, 效果与上一节是一样的
+实际上`DefaultScheduler`是从cron与作业的复合表达式中, 分别解析出 `CronTrigger` 与 `RpcJob`, 效果与上一节是一样的
 
 ```
-import net.jkcode.jkjob.cronjob.CronJobLauncher
+import net.jkcode.jkjob.schedulers.DefaultScheduler
 
 // cron与作业的复合表达式, 由cron表达式 + 作业表达式组成, 其中作业表达式前面加`:`, 标识触发的内容是作业
 // 如 "0/10 * * * * ? -> lpc net.jkcode.jksoa.rpc.example.SimpleService hostname() ()"
 //val cronJobExpr = "0/10 * * * * ? -> lpc net.jkcode.jkjob.LocalBean sayHi(String) (\\\"测试消息\\\")"
 val cronJobExpr = "0/10 * * * * ? -> rpc net.jkcode.jksoa.rpc.example.ISimpleService sayHi(String) (\"测试消息\")"
-val trigger = CronJobLauncher.lauch(cronJobExpr)
+val scheduler = DefaultScheduler()
+val trigger = scheduler.addJob(cronJobExpr)
+scheduler.start()
 ```
 
 # 文档

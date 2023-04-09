@@ -28,7 +28,7 @@ abstract class BaseTrigger : ITrigger {
     /**
      * 作业
      */
-    public override val jobs: List<net.jkcode.jkjob.IJob> = LinkedList()
+    public override val jobs: List<IJob> = LinkedList()
 
     /**
      * 作业执行的上下文
